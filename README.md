@@ -24,7 +24,7 @@ MixMA-LMM — это формат модификации MA-LMM, при кото
 
 1. Клонируйте репозиторий на свою машину:
    ```
-   git clone https://github.com/your-username/your-fork.git
+   git clone https://github.com/381c9fba/mixMA-LMM
    ```
 
 2. Перейдите в каталог проекта:
@@ -37,7 +37,7 @@ MixMA-LMM — это формат модификации MA-LMM, при кото
    pip install -r requirements.txt
    ```
 
-## Использование
+## Использование MA-LMM
 
 1. Загрузите веса модели:
    ```
@@ -50,6 +50,11 @@ MixMA-LMM — это формат модификации MA-LMM, при кото
    ```
 
 3. Выполните другие задачи, которые вы хотите выполнить с помощью модели.
+
+## Использование MixMA-LMM
+
+1. Пример использования пайплайна main.py.
+2. Разбор кода в mixture/mixMALMM.py, в mixture/demo_mixmalmm.py и в demo_malmm.py
 
 ## Ссылки
 
