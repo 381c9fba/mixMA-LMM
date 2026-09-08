@@ -1,68 +1,71 @@
 # MixMA-LMM: MixedFrame Memory-Augmented Large Multimodal Model for Long-Term Video Understanding
 
-## О проекте
+## About the project
 
-Это форк репозитория [MA-LMM](https://github.com/boheumd/MA-LMM), в котором были внесены некоторые изменения и модификации.
+This project is a fork of [MA-LMM](https://github.com/boheumd/MA-LMM) that introduces several changes and modifications.
 
-MA-LMM — это модель, предназначенная для работы с многомодальными данными и выполнения задач долгосрочного понимания видео. Она использует механизм памяти, чтобы сохранять и использовать
-информацию из прошлого для решения текущих задач.
+MA-LMM is a model designed for multimodal data and long-term video understanding tasks. It uses a memory mechanism to retain information from earlier parts of a video and apply it to the current task.
 
-## О модификации
+## About the modification
 
-Основая проблема интерпретации многомодальных видео заключается в большом количестве фреймов, которые нужно вытягиватьв из видео.
+One of the main challenges in multimodal video understanding is the large number of frames that must be extracted from a video.
 
-Как правило, используют равномерное распределение индексов фреймов через np.linspace.
-В случае, если длительность видео большое, то существует риск некачественного сэмплирования фреймов, при котором часть семантики исходного видео будет утеряна.
+Frame indices are commonly sampled at uniform intervals using `np.linspace`. For long videos, this approach may produce an unrepresentative sample and lose some of the source video's semantics.
 
-ActionShot — технология захвата объекта в действии и отображения его на одном изображении с несколькими последовательными появлениями объекта. Такая технология позволяет из нескольких кадров формировать единый кадр с изображением действия объектов, при котором, например, можно выловить семантическое действие движения
+ActionShot is a technique for capturing an object in motion and displaying several consecutive appearances of that object in a single image. By combining multiple frames into one, it can preserve semantic information about actions such as movement.
 
-![Пример ActionShot изображения](./figs/actionshot_example.jpg)
+![Example of an ActionShot image](./figs/actionshot_example.jpg)
 
-MixMA-LMM — это формат модификации MA-LMM, при котором используется baseline ActionShot'a — наложение множества фреймов между собой через имитацию большой выдержки (функция cv2.addWeighted). Алгоритм учитывает как разницу между кадрами по пороговому значению (threshold), так и максимальное время выполнения действия в рамках объектива.
+MixMA-LMM modifies MA-LMM by using a baseline ActionShot approach: multiple frames are blended to imitate a long-exposure image with `cv2.addWeighted`. The algorithm considers both a threshold-based difference between frames and the maximum duration of an action within the camera's field of view.
 
-Данный репозиторий используется для хакатона Цифровой прорыв, в дальнейшем будет развиваться для исследования гипотез касательно эффективности подобного метода.
+This repository was created for the Digital Breakthrough hackathon. Further work may explore the effectiveness of this approach.
 
-## Установка
+## Installation
 
-1. Клонируйте репозиторий на свою машину:
-   ```
-   git clone https://github.com/381c9fba/mixMA-LMM
-   ```
+1. Clone the repository:
 
-2. Перейдите в каталог проекта:
-   ```
-   cd your-fork
+   ```bash
+   git clone https://github.com/xLagerFeuer/mixMA-LMM.git
    ```
 
-3. Установите зависимости:
+2. Enter the project directory:
+
+   ```bash
+   cd mixMA-LMM
    ```
+
+3. Install the dependencies:
+
+   ```bash
    pip install -r requirements.txt
    ```
 
-## Использование MA-LMM
+## Using MA-LMM
 
-1. Загрузите веса модели:
-   ```
+1. Train the model or obtain a checkpoint by running the training script for the selected dataset:
+
+   ```bash
    bash run_scripts/${dataset}/train.sh
    ```
 
-2. Проведите тестирование модели:
-   ```
+2. Evaluate the model:
+
+   ```bash
    bash run_scripts/${dataset}/test.sh ${checkpoint_path}
    ```
 
-3. Выполните другие задачи, которые вы хотите выполнить с помощью модели.
+3. Use the model for other supported tasks as needed.
 
-## Использование MixMA-LMM
+## Using MixMA-LMM
 
-1. Пример использования пайплайна main.py.
-2. Разбор кода в mixture/mixMALMM.py, в mixture/demo_mixmalmm.py и в demo_malmm.py
+- See `main.py` for a basic pipeline example.
+- See `mixture/mixMALMM.py`, `mixture/demo_mixmalmm.ipynb`, and `demo_malmm.ipynb` for implementation details and demonstrations.
 
-## Ссылки
+## References
 
-- [Оригинальный репозиторий MA-LMM](https://github.com/boheumd/MA-LMM)
-- [Публикация о модели MA-LMM](https://arxiv.org/abs/2404.05726)
+- [Original MA-LMM repository](https://github.com/boheumd/MA-LMM)
+- [MA-LMM paper](https://arxiv.org/abs/2404.05726)
 
-## Лицензия
+## License
 
-Данная модель лицензирована под [BSD-3-Clause](https://opensource.org/licenses/BSD-3-Clause). Полный текст лицензии можно найти в файле `LICENSE` в корневом каталоге репозитория.
+This project is licensed under the [BSD 3-Clause License](https://opensource.org/licenses/BSD-3-Clause). See the `LICENSE` file in the repository root for the full license text.
