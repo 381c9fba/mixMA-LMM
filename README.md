@@ -1,5 +1,11 @@
 # MixMA-LMM: MixedFrame Memory-Augmented Large Multimodal Model for Long-Term Video Understanding
 
+![Status: Research Prototype](https://img.shields.io/badge/status-research%20prototype-4169E1)
+
+> [!IMPORTANT]
+> **Project status — Research Prototype.**
+> MixMA-LMM is an experimental implementation developed for the Digital Breakthrough hackathon. The repository contains the proposed frame-mixing approach, its integration with MA-LMM, demonstration notebooks, and experiment artifacts. It is published as research code and should be validated on the target dataset before production use.
+
 ## About the project
 
 This project is a fork of [MA-LMM](https://github.com/boheumd/MA-LMM) that introduces several changes and modifications.
